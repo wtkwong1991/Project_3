@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Project 3</title>
+    <!-- favico error  -->
+    <link rel="shortcut icon" href="#" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
+
+    <!--D3 cdn-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js"></script>
+
+    <!-- https://d3js.org/ -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!-- plotly cdn -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!--Javascript Table stuff-->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    <!--Visualizations stuff-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+
+    <!-- Website -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+
+</head>
+
+
+
+
+
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/" id="title">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Metals
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ url_for('static', filename='html/gold.html') }}">Gold</a>
+            <a class="dropdown-item" href="{{ url_for('static', filename='html/silver.html') }}">Silver</a>
+            <a class="dropdown-item" href="{{ url_for('static', filename='html/platinum.html') }}">Platinum</a>
+            <a class="dropdown-item" href="{{ url_for('static', filename='html/palladium.html') }}">Palladium</a>
+          </div>
+        </li>
+
+
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Signals/PnL
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="menu2">
+            <a class="dropdown-item" href="{{ url_for('static', filename='html/gold_finaltable.html') }}">Gold</a>
+            <a class="dropdown-item" href="{{ url_for('static', filename='html/silver_finaltable.html') }}">Silver</a>
+            <a class="dropdown-item" href="{{ url_for('static', filename='html/platinum_finaltable.html') }}">Platinum</a>
+            <a class="dropdown-item" href="{{ url_for('static', filename='html/palladium_finaltable.html') }}">Palladium</a>
+          </div>
+        </li>
+
+
+
+      </ul>
+
+    </div>
+
+
+
+
+
+
+
+  </nav>
+
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+        <h1 id="header">Precious Metals Trading</h1>
+        <p>The purpose of this project was to analyze the value of metals such as gold, silver, platinum, and palladium over time.
+        </p>
+    </div>
+</div>
+
+
+
+
+
+
+
+<aside class="container">
+  <div class="box" id="box-2">
+      <h2>Select Type of Metal for Data:</h2>
+      <hr class="my-4">
+
+
+      <div class="row" id="row-1">
+        <h4>Gold</h4>
+          <a href="{{ url_for('static', filename='html/gold.html') }}">
+              <img src="{{ url_for('static', filename='images/gold.jpeg') }}" class="img-thumbnail">
+          </a>
+
+          <a href="{{ url_for('static', filename='images/GOLD_DL_EC.png') }}" id="rnn">RNN Model Equity Curve</a>
+          <a href="{{ url_for('static', filename='images/GOLD_RF.png') }}" id="rf">RF Model Equity Curve</a>
+
+      </div>
+
+
+
+
+      <div class="row" id="row-2">
+          <h5>Silver</h5>
+          <a href="{{ url_for('static', filename='html/silver.html') }}">
+              <img src="{{ url_for('static', filename='images/silver.jpg') }}" class="img-thumbnail">
+          </a>
+
+          <a href="{{ url_for('static', filename='images/SILVER_DL_EC.png') }}" id="rnn-2">RNN Model Equity Curve</a>
+          <a href="{{ url_for('static', filename='images/SILVER_RF.png') }}" id="rf-2">RF Model Equity Curve</a>
+
+
+      </div>
+
+
+
+
+      <div class="row" id="row-3">
+          <h6>Platinum</h6>
+          <a href="{{ url_for('static', filename='html/platinum.html') }}">
+          <img src="{{ url_for('static', filename='images/platinum.jpg') }}" class="img-thumbnail">
+          </a>
+
+          <a href="{{ url_for('static', filename='images/PLATINUM_DL_EC.png') }}" id="rnn-3">RNN Model Equity Curve</a>
+          <a href="{{ url_for('static', filename='images/PLATINUM_RF.png') }}" id="rf-3">RF Model Equity Curve</a>
+
+
+      </div>
+
+
+          <div class="row" id="row-4">
+              <h6 id="h6-2">Palladium</h6>
+          <a href="{{ url_for('static', filename='html/palladium.html') }}">
+          <img src="{{ url_for('static', filename='images/palladium.jpg') }}" class="img-thumbnail">
+        </a>
+
+        <a href="{{ url_for('static', filename='images/PALLADIUM_DL_EC.png') }}" id="rnn-4">RNN Model Equity Curve</a>
+        <a href="{{ url_for('static', filename='images/PALLADIUM_RF.png') }}" id="rf-4">RF Model Equity Curve</a>
+
+          </div>
+
+
+      </div>
+
+
+</aside>
+
+
+
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+
+
+  <footer style="text-align: center" id="foot">
+    Data harvested with Quandl
+  </footer>
+
+
+
+</body>
+
+</html>
