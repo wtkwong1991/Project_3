@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Silver Final Table</title>
+    <!-- favico error  -->
+    <link rel="shortcut icon" href="#" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
+
+    <!--D3 cdn-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js"></script>
+
+    <!-- https://d3js.org/ -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <!-- plotly cdn -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!--Javascript Table stuff-->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.0.0/math.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    <!--Visualizations stuff-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+
+    <!-- Website -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
+   <!-- CSS -->
+   <link rel="stylesheet" href="/static/css/style.css"> 
+
+
+
+</head>
+
+
+
+
+
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/" id="title">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Metals
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/static/html/gold.html">Gold</a>
+            <a class="dropdown-item" href="/static/html/silver.html">Silver</a>
+            <a class="dropdown-item" href="/static/html/platinum.html">Platinum</a>
+            <a class="dropdown-item" href="/static/html/palladium.html">Palladium</a>
+          </div>
+        </li>
+      
+      
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Signals/PnL
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="menu2">
+            <a class="dropdown-item" href="/static/html/gold_finaltable.html">Gold</a>
+            <a class="dropdown-item" href="/static/html/silver_finaltable.html">Silver</a>
+            <a class="dropdown-item" href="/static/html/platinum_finaltable.html">Platinum</a>
+            <a class="dropdown-item" href="/static/html/palladium_finaltable.html">Palladium</a>
+          </div>
+        </li>
+
+
+        
+      </ul>
+
+    </div> 
+
+
+  </nav>
+
+  <div class="container" id="container-2">
+
+
+    <div class="box" id="box-3">
+      <h1>Silver Final Table Data</h1>
+      <hr class="my-4">
+
+      <p>The following table includes the final table data used for silver during this project.</p>
+
+
+      <table class="table table-bordered table-hover table-condensed">
+        <thead><tr><th title="Field #1">FIELD1</th>
+        <th title="Field #2">Date</th>
+        <th title="Field #3">Settle</th>
+        <th title="Field #4">Relative Value</th>
+        <th title="Field #5">Settle Delta</th>
+        <th title="Field #6">Rel Val Delta</th>
+        <th title="Field #7">Signal</th>
+        <th title="Field #8">Profit</th>
+        <th title="Field #9">EC</th>
+        </tr></thead>
+        <tbody><tr>
+        <td align="right">0</td>
+        <td>2019-07-26</td>
+        <td align="right">16.325</td>
+        <td align="right">15.431811332702637</td>
+        <td align="right"></td>
+        <td align="right">0.23482131958007812</td>
+        <td align="right">1.0</td>
+        <td align="right"></td>
+        <td align="right"></td>
+        </tr>
+        <tr>
+        <td align="right">5</td>
+        <td>2019-07-19</td>
+        <td align="right">16.117</td>
+        <td align="right">15.196990013122559</td>
+        <td align="right">0.2079999999999984</td>
+        <td align="right">-0.13428688049316406</td>
+        <td align="right">-1.0</td>
+        <td align="right">-0.2079999999999984</td>
+        <td align="right">2.5720000000000063</td>
+        </tr>
+        <tr>
+        <td align="right">10</td>
+        <td>2019-07-12</td>
+        <td align="right">15.161</td>
+        <td align="right">15.331276893615723</td>
+        <td align="right">0.9560000000000013</td>
+        <td align="right">0.7090396881103516</td>
+        <td align="right">1.0</td>
+        <td align="right">0.9560000000000013</td>
+        <td align="right">2.7800000000000047</td>
+        </tr>
+        <tr>
+        <td align="right">15</td>
+        <td>2019-07-05</td>
+        <td align="right">14.918</td>
+        <td align="right">14.622237205505371</td>
+        <td align="right">0.24300000000000033</td>
+        <td align="right">0.0</td>
+        <td align="right">0.0</td>
+        <td align="right">0.0</td>
+        <td align="right">1.8240000000000034</td>
+        </tr>
+        <tr>
+        <td align="right">19</td>
+        <td>2019-06-28</td>
+        <td align="right">15.253</td>
+        <td align="right">14.622237205505371</td>
+        <td align="right">-0.33500000000000085</td>
+        <td align="right">-0.13612842559814453</td>
+        <td align="right">-1.0</td>
+        <td align="right">0.33500000000000085</td>
+        <td align="right">1.8240000000000034</td>
+        </tr>
+        <tr>
+        <td align="right">24</td>
+        <td>2019-06-21</td>
+        <td align="right">15.29</td>
+        <td align="right">14.758365631103516</td>
+        <td align="right">-0.036999999999999034</td>
+        <td align="right">0.11993789672851562</td>
+        <td align="right">1.0</td>
+        <td align="right">-0.036999999999999034</td>
+        <td align="right">1.4890000000000025</td>
+        </tr>
+        <tr>
+        <td align="right">29</td>
+        <td>2019-06-14</td>
+        <td align="right">14.802999999999999</td>
+        <td align="right">14.638427734375</td>
+        <td align="right">0.4870000000000001</td>
+        <td align="right">0.17986106872558594</td>
+        <td align="right">1.0</td>
+        <td align="right">0.4870000000000001</td>
+        <td align="right">1.5260000000000016</td>
+        </tr>
+        <tr>
+        <td align="right">34</td>
+        <td>2019-06-07</td>
+        <td align="right">15.030999999999999</td>
+        <td align="right">14.458566665649414</td>
+        <td align="right">-0.22799999999999976</td>
+        <td align="right">-0.022812843322753906</td>
+        <td align="right">-1.0</td>
+        <td align="right">0.22799999999999976</td>
+        <td align="right">1.0390000000000015</td>
+        </tr>
+        <tr>
+        <td align="right">39</td>
+        <td>2019-05-31</td>
+        <td align="right">14.567</td>
+        <td align="right">14.481379508972168</td>
+        <td align="right">0.46399999999999864</td>
+        <td align="right">-0.31573963165283203</td>
+        <td align="right">-1.0</td>
+        <td align="right">-0.46399999999999864</td>
+        <td align="right">0.8110000000000017</td>
+        </tr>
+        <tr>
+        <td align="right">43</td>
+        <td>2019-05-24</td>
+        <td align="right">14.52</td>
+        <td align="right">14.797119140625</td>
+        <td align="right">0.0470000000000006</td>
+        <td align="right">-0.06491661071777344</td>
+        <td align="right">-1.0</td>
+        <td align="right">-0.0470000000000006</td>
+        <td align="right">1.2750000000000004</td>
+        </tr>
+        <tr>
+        <td align="right">48</td>
+        <td>2019-05-17</td>
+        <td align="right">14.347999999999999</td>
+        <td align="right">14.862035751342773</td>
+        <td align="right">0.1720000000000006</td>
+        <td align="right">-0.24510478973388672</td>
+        <td align="right">-1.0</td>
+        <td align="right">-0.1720000000000006</td>
+        <td align="right">1.322000000000001</td>
+        </tr>
+        <tr>
+        <td align="right">53</td>
+        <td>2019-05-10</td>
+        <td align="right">14.725999999999999</td>
+        <td align="right">15.10714054107666</td>
+        <td align="right">-0.3780000000000001</td>
+        <td align="right">0.19088363647460938</td>
+        <td align="right">1.0</td>
+        <td align="right">-0.3780000000000001</td>
+        <td align="right">1.4940000000000015</td>
+        </tr>
+        <tr>
+        <td align="right">58</td>
+        <td>2019-05-03</td>
+        <td align="right">14.907</td>
+        <td align="right">14.91625690460205</td>
+        <td align="right">-0.18100000000000094</td>
+        <td align="right">-0.08302974700927734</td>
+        <td align="right">-1.0</td>
+        <td align="right">0.18100000000000094</td>
+        <td align="right">1.8720000000000017</td>
+        </tr>
+        <tr>
+        <td align="right">63</td>
+        <td>2019-04-26</td>
+        <td align="right">15.002</td>
+        <td align="right">14.999286651611328</td>
+        <td align="right">-0.09500000000000064</td>
+        <td align="right">-0.33576107025146484</td>
+        <td align="right">-1.0</td>
+        <td align="right">0.09500000000000064</td>
+        <td align="right">1.6910000000000007</td>
+        </tr>
+        <tr>
+        <td align="right">72</td>
+        <td>2019-04-12</td>
+        <td align="right">14.92</td>
+        <td align="right">15.335047721862793</td>
+        <td align="right">0.08200000000000074</td>
+        <td align="right">-0.3632526397705078</td>
+        <td align="right">-1.0</td>
+        <td align="right">-0.08200000000000074</td>
+        <td align="right">1.596</td>
+        </tr>
+        <tr>
+        <td align="right">77</td>
+        <td>2019-04-05</td>
+        <td align="right">15.043</td>
+        <td align="right">15.6983003616333</td>
+        <td align="right">-0.12299999999999933</td>
+        <td align="right">0.11851978302001953</td>
+        <td align="right">1.0</td>
+        <td align="right">-0.12299999999999933</td>
+        <td align="right">1.6780000000000008</td>
+        </tr>
+        <tr>
+        <td align="right">82</td>
+        <td>2019-03-29</td>
+        <td align="right">15.06</td>
+        <td align="right">15.579780578613281</td>
+        <td align="right">-0.017000000000001236</td>
+        <td align="right">0.048412322998046875</td>
+        <td align="right">1.0</td>
+        <td align="right">-0.017000000000001236</td>
+        <td align="right">1.8010000000000002</td>
+        </tr>
+        <tr>
+        <td align="right">87</td>
+        <td>2019-03-22</td>
+        <td align="right">15.345</td>
+        <td align="right">15.531368255615234</td>
+        <td align="right">-0.28500000000000014</td>
+        <td align="right">-0.19068527221679688</td>
+        <td align="right">-1.0</td>
+        <td align="right">0.28500000000000014</td>
+        <td align="right">1.8180000000000014</td>
+        </tr>
+        <tr>
+        <td align="right">92</td>
+        <td>2019-03-15</td>
+        <td align="right">15.253</td>
+        <td align="right">15.722053527832031</td>
+        <td align="right">0.09200000000000053</td>
+        <td align="right">-0.6064128875732422</td>
+        <td align="right">-1.0</td>
+        <td align="right">-0.09200000000000053</td>
+        <td align="right">1.5330000000000013</td>
+        </tr>
+        <tr>
+        <td align="right">97</td>
+        <td>2019-03-08</td>
+        <td align="right">15.272</td>
+        <td align="right">16.328466415405273</td>
+        <td align="right">-0.019000000000000128</td>
+        <td align="right">0.34409618377685547</td>
+        <td align="right">1.0</td>
+        <td align="right">-0.019000000000000128</td>
+        <td align="right">1.6250000000000018</td>
+        </tr>
+        <tr>
+        <td align="right">102</td>
+        <td>2019-03-01</td>
+        <td align="right">15.169</td>
+        <td align="right">15.984370231628418</td>
+        <td align="right">0.10299999999999976</td>
+        <td align="right">-0.08455562591552734</td>
+        <td align="right">-1.0</td>
+        <td align="right">-0.10299999999999976</td>
+        <td align="right">1.644000000000002</td>
+        </tr>
+        <tr>
+        <td align="right">107</td>
+        <td>2019-02-22</td>
+        <td align="right">15.914000000000001</td>
+        <td align="right">16.068925857543945</td>
+        <td align="right">-0.745000000000001</td>
+        <td align="right">-0.31935691833496094</td>
+        <td align="right">-1.0</td>
+        <td align="right">0.745000000000001</td>
+        <td align="right">1.7470000000000017</td>
+        </tr>
+        <tr>
+        <td align="right">111</td>
+        <td>2019-02-15</td>
+        <td align="right">15.743</td>
+        <td align="right">16.388282775878906</td>
+        <td align="right">0.17100000000000115</td>
+        <td align="right">0.3408050537109375</td>
+        <td align="right">1.0</td>
+        <td align="right">0.17100000000000115</td>
+        <td align="right">1.0020000000000007</td>
+        </tr>
+        <tr>
+        <td align="right">116</td>
+        <td>2019-02-08</td>
+        <td align="right">15.809000000000001</td>
+        <td align="right">16.04747772216797</td>
+        <td align="right">-0.06600000000000072</td>
+        <td align="right">0.15814590454101562</td>
+        <td align="right">1.0</td>
+        <td align="right">-0.06600000000000072</td>
+        <td align="right">0.8309999999999995</td>
+        </tr>
+        <tr>
+        <td align="right">121</td>
+        <td>2019-02-01</td>
+        <td align="right">15.931</td>
+        <td align="right">15.889331817626953</td>
+        <td align="right">-0.12199999999999811</td>
+        <td align="right">-0.21688461303710938</td>
+        <td align="right">-1.0</td>
+        <td align="right">0.12199999999999811</td>
+        <td align="right">0.8970000000000002</td>
+        </tr>
+        <tr>
+        <td align="right">126</td>
+        <td>2019-01-25</td>
+        <td align="right">15.639000000000001</td>
+        <td align="right">16.106216430664062</td>
+        <td align="right">0.29199999999999804</td>
+        <td align="right">-0.03580474853515625</td>
+        <td align="right">-1.0</td>
+        <td align="right">-0.29199999999999804</td>
+        <td align="right">0.7750000000000021</td>
+        </tr>
+        <tr>
+        <td align="right">130</td>
+        <td>2019-01-18</td>
+        <td align="right">15.33</td>
+        <td align="right">16.14202117919922</td>
+        <td align="right">0.30900000000000105</td>
+        <td align="right">0.4989652633666992</td>
+        <td align="right">1.0</td>
+        <td align="right">0.30900000000000105</td>
+        <td align="right">1.0670000000000002</td>
+        </tr>
+        <tr>
+        <td align="right">135</td>
+        <td>2019-01-11</td>
+        <td align="right">15.577</td>
+        <td align="right">15.64305591583252</td>
+        <td align="right">-0.2469999999999999</td>
+        <td align="right">0.6086215972900391</td>
+        <td align="right">1.0</td>
+        <td align="right">-0.2469999999999999</td>
+        <td align="right">0.7579999999999991</td>
+        </tr>
+        <tr>
+        <td align="right">140</td>
+        <td>2019-01-04</td>
+        <td align="right">15.695</td>
+        <td align="right">15.03443431854248</td>
+        <td align="right">-0.11800000000000033</td>
+        <td align="right">0.05621814727783203</td>
+        <td align="right">1.0</td>
+        <td align="right">-0.11800000000000033</td>
+        <td align="right">1.004999999999999</td>
+        </tr>
+        <tr>
+        <td align="right">144</td>
+        <td>2018-12-28</td>
+        <td align="right">15.325999999999999</td>
+        <td align="right">14.978216171264648</td>
+        <td align="right">0.36900000000000155</td>
+        <td align="right">0.1799907684326172</td>
+        <td align="right">1.0</td>
+        <td align="right">0.36900000000000155</td>
+        <td align="right">1.1229999999999993</td>
+        </tr>
+        <tr>
+        <td align="right">148</td>
+        <td>2018-12-21</td>
+        <td align="right">14.583</td>
+        <td align="right">14.798225402832031</td>
+        <td align="right">0.7429999999999986</td>
+        <td align="right">0.1946554183959961</td>
+        <td align="right">1.0</td>
+        <td align="right">0.7429999999999986</td>
+        <td align="right">0.7539999999999978</td>
+        </tr>
+        <tr>
+        <td align="right">153</td>
+        <td>2018-12-14</td>
+        <td align="right">14.513</td>
+        <td align="right">14.603569984436035</td>
+        <td align="right">0.07000000000000028</td>
+        <td align="right">0.08512592315673828</td>
+        <td align="right">1.0</td>
+        <td align="right">0.07000000000000028</td>
+        <td align="right">0.010999999999999233</td>
+        </tr>
+        <tr>
+        <td align="right">158</td>
+        <td>2018-12-07</td>
+        <td align="right">14.572000000000001</td>
+        <td align="right">14.518444061279297</td>
+        <td align="right">-0.05900000000000105</td>
+        <td align="right">0.052371978759765625</td>
+        <td align="right">1.0</td>
+        <td align="right">-0.05900000000000105</td>
+        <td align="right">-0.05900000000000105</td>
+        </tr>
+        <tr>
+        <td align="right">163</td>
+        <td>2018-11-30</td>
+        <td align="right">14.094000000000001</td>
+        <td align="right">14.466072082519531</td>
+        <td align="right">0.47799999999999976</td>
+        <td align="right"></td>
+        <td align="right"></td>
+        <td align="right"></td>
+        <td align="right"></td>
+        </tr>
+        </tbody></table>
+
+
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+
+
+
+
+
+<footer style="text-align: center" id="foot">
+  Data harvested with Quandl
+  </footer>
+
+</body>
+
+</html>
+
