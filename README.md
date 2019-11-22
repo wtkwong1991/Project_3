@@ -1,2 +1,2 @@
 # Precious_Metals_Trading
-Project 3
+The purpose of this project was to analyze the value of metals such as gold, silver, platinum, and palladium over time.
